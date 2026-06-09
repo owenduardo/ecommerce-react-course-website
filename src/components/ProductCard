@@ -1,0 +1,26 @@
+// 1. ADD MISSING IMPORTS AT THE TOP
+import { Link } from "react-router-dom";
+
+// 2. ACCEPT THE PRODUCT PROP HERE
+export default function ProductCard({ product }) {
+  return (
+    // 3. Removed 'key' from here (it belongs in the map loop)
+    <div className="product-card">
+      <img src={product.image} className="product-card-image" alt={product.name} />    
+      
+      <div className="producd-card-content">
+        {/* 4. Removed the accidental '$' before product.name */}
+        <h3 className="product-card-name">{product.name}</h3>
+        <p className="product-card-price">${product.price}</p>
+        
+        <div className="product-card-actios">
+          {/* 5. Added the required 'to' path */}
+          <Link to={`/product/${product.id}`} className="btn btn-secondary">
+            View Details
+          </Link>
+          <button className="btn btn-primary">Add to Cart</button>
+        </div>
+      </div> 
+    </div>
+  );
+}
