@@ -1,26 +1,35 @@
-// 1. ADD MISSING IMPORTS AT THE TOP
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
 
-// 2. ACCEPT THE PRODUCT PROP HERE
 export default function ProductCard({ product }) {
-  return (
-    // 3. Removed 'key' from here (it belongs in the map loop)
-    <div className="product-card">
-      <img src={product.image} className="product-card-image" alt={product.name} />    
+  const { addToCart, cartItems } = useCart();
+  const productInCart = cartItems.find((item) => item.id === product.id);
 
+  const productQuantityLabel = productInCart
+    ? `(${productInCart.quantity})`
+    : "";
+  return (
+    <div className="product-card">
+      <img
+        src={product.image}
+        alt={product.name}
+        className="product-card-image"
+      />
       <div className="product-card-content">
-        {/* 4. Removed the accidental '$' before product.name */}
         <h3 className="product-card-name">{product.name}</h3>
         <p className="product-card-price">${product.price}</p>
-
         <div className="product-card-actions">
-
-          <Link to={`/product/${product.id}`} className="btn btn-secondary">
+          <Link className="btn btn-secondary" to={`/products/${product.id}`}>
             View Details
           </Link>
-          <button className="btn btn-primary">Add to Cart</button>
+          <button
+            className="btn btn-primary"
+            onClick={() => addToCart(product.id)}
+          >
+            Add to Cart {productQuantityLabel}
+          </button>
         </div>
-      </div> 
+      </div>
     </div>
   );
 }
