@@ -7,14 +7,14 @@ export default function ProductCard({ product }) {
     // 3. Removed 'key' from here (it belongs in the map loop)
     <div className="product-card">
       <img src={product.image} className="product-card-image" alt={product.name} />    
-      
-      <div className="producd-card-content">
+
+      <div className="product-card-content">
         {/* 4. Removed the accidental '$' before product.name */}
         <h3 className="product-card-name">{product.name}</h3>
         <p className="product-card-price">${product.price}</p>
-        
-        <div className="product-card-actios">
-          {/* 5. Added the required 'to' path */}
+
+        <div className="product-card-actions">
+
           <Link to={`/product/${product.id}`} className="btn btn-secondary">
             View Details
           </Link>
